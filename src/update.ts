@@ -48,7 +48,7 @@ const InitializeApp= ()=> {
       const version = await CapacitorUpdater.download({
         url: 'https://github.com/Sivaraman1530/sample-test/archive/refs/tags/test_sample.zip',
         // You may need to specify the current version here
-        version: '3.0.0'
+        version: '4.0.0'
       });
 
       // Activate the update
