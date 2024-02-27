@@ -46,14 +46,14 @@ const InitializeApp= ()=> {
     try {
       // Download the update
       const version = await CapacitorUpdater.download({
-        url: 'https://github.com/Sivaraman1530/autoTest/archive/refs/tags/test.zip',
+        url: 'https://github.com/Sivaraman1530/sample-test/archive/refs/tags/test_sample.zip',
         // You may need to specify the current version here
-        version: '2.0.0'
+        version: '3.0.0'
       });
 
       // Activate the update
       await CapacitorUpdater.set(version);
-console.log("ver",version)
+      console.log("ver",JSON.stringify(version),JSON.stringify(CapacitorUpdater.getChannel()),JSON.stringify(CapacitorUpdater.getBuiltinVersion()),JSON.stringify(CapacitorUpdater.getLatest()))
       // Update has been activated
       console.log('Update activated successfully');
     } catch (error) {
