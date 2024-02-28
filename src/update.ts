@@ -3,13 +3,14 @@ import { SplashScreen } from '@capacitor/splash-screen'
 import { App } from '@capacitor/app'
 
 const InitializeApp= ()=> {
+  console.log("ver 6")
 let data:any
 CapacitorUpdater.notifyAppReady()
 App.addListener('appStateChange', async(state) => {
      if (state.isActive) {
        // Do the download during user active app time to prevent failed download
        data = await CapacitorUpdater.download({
-       version: '5.0.0',
+       version: '6.0.0',
        url: 'https://github.com/Sivaraman1530/sample-test/archive/refs/tags/test_sample.zip',
        })
      }
