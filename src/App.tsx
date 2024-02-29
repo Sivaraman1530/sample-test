@@ -34,12 +34,38 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import InitializeApp from './update';
+import { BundleInfo, CapacitorUpdater } from '@capgo/capacitor-updater';
+import { App } from '@capacitor/app'
+import { SplashScreen } from '@capacitor/splash-screen';
 
 setupIonicReact();
 
-const App: React.FC = () => (
+const App1: React.FC = () =>{
+  let data:any|BundleInfo
+CapacitorUpdater.notifyAppReady()
+App.addListener('appStateChange', async(state) => {
+     if (state.isActive) {
+       // Do the download during user active app time to prevent failed download
+       data = await CapacitorUpdater.download({
+       version: '9.0.0',
+       url: 'https://github.com/Sivaraman1530/sample-test/archive/refs/tags/v-8.zip',
+       })
+     }
+     console.log("data",JSON.stringify(data))
+     if (!state.isActive && data.version !== "") {
+       // Do the switch when user leave app
+       SplashScreen.show()
+       try {
+         await CapacitorUpdater.set(data)
+       } catch (err) {
+         console.log(err)
+         SplashScreen.hide() // in case the set fail, otherwise the new app will have to hide it
+       }
+     }
+ })
+
+  return  (
   <IonApp>
-    <InitializeApp/>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -74,5 +100,6 @@ const App: React.FC = () => (
     </IonReactRouter>
   </IonApp>
 );
+}
 
-export default App;
+export default App1;

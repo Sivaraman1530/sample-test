@@ -1,10 +1,10 @@
-import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { BundleInfo, CapacitorUpdater } from '@capgo/capacitor-updater'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { App } from '@capacitor/app'
 
 const InitializeApp= ()=> {
   console.log("ver 7")
-let data:any
+let data:any|BundleInfo
 CapacitorUpdater.notifyAppReady()
 App.addListener('appStateChange', async(state) => {
      if (state.isActive) {
